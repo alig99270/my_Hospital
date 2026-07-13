@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-=2@e4^21i3r2dzt5$gir97^(l%qr4371&#1r_2il1k6_d9rj_2
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -84,17 +84,28 @@ WSGI_APPLICATION = 'hms.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': os.environ.get('DB_NAME', 'hms_db'),
-        'USER': os.environ.get('DB_USER', 'root'),
-        'PASSWORD': os.environ.get('DB_PASSWORD', 'password'),
-        'HOST': os.environ.get('DB_HOST', 'localhost'),
-        'PORT': os.environ.get('DB_PORT', '3306'),
-        'OPTIONS': {'charset': 'utf8mb4'},
+import sys
+
+# Use SQLite for testing, MySQL for development/production
+if 'test' in sys.argv or os.environ.get('TESTING') == 'True':
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': 'db_test.sqlite3',
+        }
     }
-}
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.mysql',
+            'NAME': os.environ.get('DB_NAME', 'hms_db'),
+            'USER': os.environ.get('DB_USER', 'root'),
+            'PASSWORD': os.environ.get('DB_PASSWORD', 'password'),
+            'HOST': os.environ.get('DB_HOST', 'localhost'),
+            'PORT': os.environ.get('DB_PORT', '3306'),
+            'OPTIONS': {'charset': 'utf8mb4'},
+        }
+    }
 # Password validation
 # https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators
 AUTH_USER_MODEL = 'accounts.User'
