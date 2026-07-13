@@ -1,9 +1,8 @@
-from rest_framework import viewsets, status
-from rest_framework.response import Response
+from rest_framework import viewsets
 from .models import Shift
 from .serializers import ShiftSerializer
-from accounts.models import DoctorProfile
 from hms.permissions import IsDoctor, IsAdmin
+
 
 class ShiftViewSet(viewsets.ModelViewSet):
     queryset = Shift.objects.all()

@@ -1,31 +1,42 @@
 from rest_framework import permissions
 
-class IsAdmin(permissions.BasePermission):
+
+class RolePermission(permissions.BasePermission):
+    """Base permission class for role-based access control."""
+    allowed_roles = []
+
+    def has_permission(self, request, view):
+        return (
+            request.user.is_authenticated and
+            request.user.role in self.allowed_roles
+        )
+
+
+class IsAdmin(RolePermission):
     """Allows access only to admin users."""
-    def has_permission(self, request, view):
-        return request.user.is_authenticated and request.user.role == 'Admin'
+    allowed_roles = ['Admin']
 
-class IsDoctor(permissions.BasePermission):
+
+class IsDoctor(RolePermission):
     """Allows access only to doctor users."""
-    def has_permission(self, request, view):
-        return request.user.is_authenticated and request.user.role == 'Doctor'
+    allowed_roles = ['Doctor']
 
-class IsStaff(permissions.BasePermission):
+
+class IsStaff(RolePermission):
     """Allows access only to staff users."""
-    def has_permission(self, request, view):
-        return request.user.is_authenticated and request.user.role == 'Staff'
+    allowed_roles = ['Staff']
 
-class IsPatient(permissions.BasePermission):
+
+class IsPatient(RolePermission):
     """Allows access only to patient users."""
-    def has_permission(self, request, view):
-        return request.user.is_authenticated and request.user.role == 'Patient'
+    allowed_roles = ['Patient']
 
-class IsDoctorOrAdmin(permissions.BasePermission):
+
+class IsDoctorOrAdmin(RolePermission):
     """Allows access to doctors and admins."""
-    def has_permission(self, request, view):
-        return request.user.is_authenticated and request.user.role in ['Doctor', 'Admin']
+    allowed_roles = ['Doctor', 'Admin']
 
-class IsPatientOrAdmin(permissions.BasePermission):
+
+class IsPatientOrAdmin(RolePermission):
     """Allows access to patients and admins."""
-    def has_permission(self, request, view):
-        return request.user.is_authenticated and request.user.role in ['Patient', 'Admin']
+    allowed_roles = ['Patient', 'Admin']

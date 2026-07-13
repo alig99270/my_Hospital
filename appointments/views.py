@@ -1,9 +1,8 @@
-from rest_framework import viewsets, status
-from rest_framework.response import Response
+from rest_framework import viewsets
 from .models import Appointment
 from .serializers import AppointmentSerializer
-from accounts.models import DoctorProfile, PatientProfile
 from hms.permissions import IsDoctor, IsPatient, IsAdmin
+
 
 class AppointmentViewSet(viewsets.ModelViewSet):
     queryset = Appointment.objects.all()
@@ -12,10 +11,9 @@ class AppointmentViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):
         user = self.request.user
-        if user.role == 'Admin':
-            return Appointment.objects.all()
-        elif user.role == 'Doctor':
-            return Appointment.objects.filter(doctor__user=user)
-        elif user.role == 'Patient':
-            return Appointment.objects.filter(patient__user=user)
-        return Appointment.objects.none()
+        role_filters = {
+            'Admin': Appointment.objects.all(),
+            'Doctor': Appointment.objects.filter(doctor__user=user),
+            'Patient': Appointment.objects.filter(patient__user=user),
+        }
+        return role_filters.get(user.role, Appointment.objects.none())
