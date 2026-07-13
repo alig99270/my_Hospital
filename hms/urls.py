@@ -33,6 +33,12 @@ urlpatterns = [
     path('api/', include('medical_records.urls')),
     path('api/', include('prescriptions.urls')),
     path('api/', include('audit.urls')),
+    # Reporting & Statistics
+    path('api/', include('reporting.urls')),
+    # Notifications & SMS
+    path('api/', include('notifications.urls')),
+    # Dashboard
+    path('api/', include('dashboard.urls')),
     path('swagger/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
     path('redoc/', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
 ]
