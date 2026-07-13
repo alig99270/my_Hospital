@@ -1,9 +1,13 @@
-# prescriptions/models.py
 from django.db import models
 from medical_records.models import MedicalRecord
 
+
 class Prescription(models.Model):
-    medical_record = models.ForeignKey(MedicalRecord, on_delete=models.CASCADE, related_name='prescriptions')
+    medical_record = models.ForeignKey(
+        MedicalRecord,
+        on_delete=models.CASCADE,
+        related_name='prescriptions'
+    )
     medicine_name = models.CharField(max_length=100)
     dosage = models.CharField(max_length=50)
     frequency = models.CharField(max_length=50)

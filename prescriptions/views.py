@@ -1,8 +1,8 @@
-# prescriptions/views.py
 from rest_framework import viewsets
 from .models import Prescription
 from .serializers import PrescriptionSerializer
 from hms.permissions import IsDoctor, IsAdmin
+
 
 class PrescriptionViewSet(viewsets.ModelViewSet):
     queryset = Prescription.objects.all()

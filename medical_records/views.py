@@ -1,8 +1,8 @@
-# medical_records/views.py
 from rest_framework import viewsets
 from .models import MedicalRecord
 from .serializers import MedicalRecordSerializer
 from hms.permissions import IsDoctor, IsAdmin
+
 
 class MedicalRecordViewSet(viewsets.ModelViewSet):
     queryset = MedicalRecord.objects.all()
