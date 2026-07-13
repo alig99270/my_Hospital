@@ -21,15 +21,24 @@ wheels/
 .installed.cfg
 *.egg
 
-# Environment
-.venv/
-venv/
-env/
-ENV/
+# Django
+*.log
+local_settings.py
+db.sqlite3
+db.sqlite3-journal
 
 # IDE
 .vscode/
 .idea/
 *.swp
 *.swo
+
+# Environment
+.env
+.env.local
+*.env.*
+
+# OS
+.DS_Store
+Thumbs.db
 ```
