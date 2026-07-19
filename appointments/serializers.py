@@ -20,12 +20,13 @@ class AppointmentSerializer(serializers.ModelSerializer):
     def validate(self, attrs):
         # Validate status transitions
         if 'status' in attrs:
-            current_status = self.instance.status if self.instance else 'booked'
-            new_status = attrs['status']
+            if self.instance:
+                current_status = self.instance.status
+                new_status = attrs['status']
 
-            if current_status == 'booked' and new_status not in ['canceled', 'completed']:
-                raise serializers.ValidationError("Invalid status transition")
-            if current_status in ['canceled', 'completed'] and new_status != current_status:
-                raise serializers.ValidationError("Cannot change status of completed/canceled appointment")
+                if current_status == 'booked' and new_status not in ['canceled', 'completed']:
+                    raise serializers.ValidationError("Invalid status transition")
+                if current_status in ['canceled', 'completed'] and new_status != current_status:
+                    raise serializers.ValidationError("Cannot change status of completed/canceled appointment")
 
         return attrs

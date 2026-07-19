@@ -77,11 +77,11 @@ class ShiftModelTest(TestCase):
     def test_shift_status_choices(self):
         """Test shift status choices"""
         statuses = ['available', 'booked', 'cancelled']
-        for status in statuses:
+        for i, status in enumerate(statuses):
             shift = Shift.objects.create(
                 doctor=self.doctor_profile,
-                start_time=timezone.now() + timedelta(days=2),
-                end_time=timezone.now() + timedelta(days=2, hours=4),
+                start_time=timezone.now() + timedelta(days=10+i),
+                end_time=timezone.now() + timedelta(days=10+i, hours=4),
                 status=status
             )
             self.assertEqual(shift.status, status)
