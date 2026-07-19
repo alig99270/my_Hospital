@@ -274,14 +274,21 @@ class AppointmentModelTest(TestCase):
 
     def test_appointment_status_choices(self):
         """Test appointment status choices"""
+        # Create a new shift for this test to avoid overlap issues
+        new_shift = Shift.objects.create(
+            doctor=self.doctor_profile,
+            start_time=timezone.now() + timedelta(days=5),
+            end_time=timezone.now() + timedelta(days=5, hours=8),
+            status='available'
+        )
         statuses = ['booked', 'canceled', 'completed']
-        for status in statuses:
+        for i, status in enumerate(statuses):
             appt = Appointment.objects.create(
                 patient=self.patient_profile,
                 doctor=self.doctor_profile,
-                shift=self.shift,
-                start_time=timezone.now() + timedelta(days=2),
-                end_time=timezone.now() + timedelta(days=2, hours=1),
+                shift=new_shift,
+                start_time=new_shift.start_time + timedelta(hours=i*2),
+                end_time=new_shift.start_time + timedelta(hours=i*2+1),
                 status=status
             )
             self.assertEqual(appt.status, status)

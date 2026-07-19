@@ -116,8 +116,23 @@ class PatientDashboardModelTest(TestCase):
 
     def test_patient_dashboard_default_values(self):
         """Test patient dashboard default values"""
+        # Create a new patient profile for this test to avoid unique constraint
+        patient_user2 = User.objects.create_user(
+            username='patient_dash_test2',
+            email='patient_dash2@example.com',
+            password='testpass123',
+            role='Patient'
+        )
+        patient_profile2 = PatientProfile.objects.create(
+            user=patient_user2,
+            full_name='Test Patient Dashboard 2',
+            date_of_birth='1990-01-02',
+            gender='Female',
+            email='patient_dash2@test.com',
+            phone='1234567891'
+        )
         dashboard = PatientDashboard.objects.create(
-            patient=self.patient_profile
+            patient=patient_profile2
         )
         self.assertEqual(dashboard.pending_prescriptions, 0)
         self.assertEqual(dashboard.unread_notifications, 0)

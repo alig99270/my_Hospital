@@ -22,7 +22,7 @@ class UserProfileFactory:
                 full_name=profile_data.get('full_name'),
                 date_of_birth=profile_data.get('date_of_birth'),
                 gender=profile_data.get('gender'),
-                email=profile_data.get('email'),
+                email=profile_data.get('email', user.email),
                 phone=profile_data.get('phone'),
                 medical_history_summary=profile_data.get('medical_history_summary', '')
             ),

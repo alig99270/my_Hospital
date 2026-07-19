@@ -1,6 +1,8 @@
 Django
 djangorestframework
-djangorestframework-simplejwt==5.2.2
+djangorestframework-simplejwt>=5.3.0
 mysqlclient
 pytz==2024.1
 python-dotenv==1.0.0  # Optional: For managing environment variables
+drf-yasg
+setuptools

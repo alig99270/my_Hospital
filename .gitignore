@@ -4,19 +4,10 @@ __pycache__/
 *.pyc
 *.pyo
 *.pyd
-.Python
-*.so
-.coverage
-htmlcov/
-.pytest_cache/
-.mypy_cache/
 
-# Database
-*.sqlite3
-
-# Environment
-.venv/
+# Dependencies
 venv/
+.venv/
 .env
 .env.local
 *.env.*
@@ -24,19 +15,28 @@ venv/
 # Logs
 *.log
 
-# Testing
+# Coverage
 .coverage
+coverage/
 htmlcov/
 
-# IDE
+# Testing
+.pytest_cache/
+.mypy_cache/
+
+# Build artifacts
+dist/
+build/
+*.egg-info/
+
+# Editors
 .vscode/
 .idea/
 *.swp
 *.swo
 *.tmp
 
-# Build and distribution
-dist/
-build/
-*.egg-info/
+# OS
+.DS_Store
+Thumbs.db
 ```
