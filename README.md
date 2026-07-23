@@ -548,7 +548,7 @@ GET    /api/audit/resource/{type}/   # لاگ‌های یک منبع
 ## 📞 ارتباط با توسعه‌دهنده
 
 در صورت داشتن سوال یا پیشنهاد:
-- 📧 Email: your.email@example.com
+- 📧 Email: alig99270@gmail.com
 - 💬 Issues: از بخش Issues گیت‌هاب استفاده کنید
 - 🌐 Website: coming soon...
 
