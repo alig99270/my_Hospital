@@ -1,21 +1,29 @@
-```
-# Python
+```gitignore
+# Compiled Python files
 __pycache__/
 *.pyc
-*.pyo
-*.pyd
-.Python
-env/
-venv/
-.venv/
-.ENV
-.python-version
 
-# Logs
-*.log
-
-# Environment variables
+# Environment files
 .env
 .env.local
 .env.*
+
+# Logs and temporary files
+*.log
+*.tmp
+*.swp
+
+# Editors and IDEs
+.vscode/
+.idea/
+
+# Dependencies
+.venv/
+venv/
+node_modules/
+
+# Build artifacts
+dist/
+build/
+target/
 ```
